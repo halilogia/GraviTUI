@@ -88,6 +88,12 @@ class Terminal:
             except OSError:
                 pass  # stdout kapandi (boru koptu); geri yuklenecek bir sey yok
 
+    def disable_raw_mode(self) -> None:
+        self.leave()
+
+    def enable_raw_mode(self) -> None:
+        self.enter()
+
     def move_cursor(self, x: int, y: int) -> None:
         self.write(f"\x1b[{y + 1};{x + 1}H")
 

@@ -163,17 +163,17 @@ def main():
                     selected_idx = (selected_idx + 1) % len(ITEMS)
                 elif k_low in ("enter", "space"):
                     # Terminali gecici olarak serbest birak ve uygulamayi calistir
-                    term.disable_raw_mode()
+                    term.leave()
                     run_target(ITEMS[selected_idx])
-                    term.enable_raw_mode()
+                    term.enter()
                     writer.invalidate()
                 elif k_low in "1234567":
                     idx = int(k_low) - 1
                     if 0 <= idx < len(ITEMS):
                         selected_idx = idx
-                        term.disable_raw_mode()
+                        term.leave()
                         run_target(ITEMS[selected_idx])
-                        term.enable_raw_mode()
+                        term.enter()
                         writer.invalidate()
 
             buf.clear()

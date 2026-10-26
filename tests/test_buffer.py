@@ -1,6 +1,7 @@
+import io
 import unittest
 
-from gravitui import Buffer, Cell, Color, Style, Rect, gradient, translate_key
+from gravitui import Buffer, Cell, Color, Style, Rect, gradient, translate_key, Terminal
 
 
 class TestColor(unittest.TestCase):
@@ -62,6 +63,17 @@ class TestBuffer(unittest.TestCase):
         self.assertEqual(translate_key("\r"), "enter")
         self.assertEqual(translate_key("q"), "q")
         self.assertEqual(translate_key("\x03"), "ctrl+c")
+
+    def test_set_string_and_terminal_raw_mode(self):
+        b = Buffer(6, 1)
+        b.set_string(1, 0, "hi")
+        self.assertEqual(b.to_lines()[0], " hi   ")
+        out = io.StringIO()
+        t = Terminal(out)
+        t.enable_raw_mode()
+        self.assertTrue(t._active)
+        t.disable_raw_mode()
+        self.assertFalse(t._active)
 
 
 if __name__ == "__main__":
