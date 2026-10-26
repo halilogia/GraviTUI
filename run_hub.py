@@ -62,8 +62,17 @@ ITEMS = [
         "desc": "Klasik 40 kare Monopoly TUI oyunu ve 100.000 oyunluk Monte Carlo inis/ROI isi haritasi."
     },
     {
-        "id": "flower",
+        "id": "tree",
         "num": "4",
+        "category": "apps",
+        "title": "🌲 Claude Agent Tree TUI",
+        "path": os.path.join(ROOT_DIR, "apps", "claude_agent_tree", "main.py"),
+        "cwd": os.path.join(ROOT_DIR, "apps", "claude_agent_tree"),
+        "desc": "Claude Code hiyerarsik coklu ajan agaci, Opus 5.5 oturumu, FABLE 5.1 advisor ve JEV metrikleri."
+    },
+    {
+        "id": "flower",
+        "num": "5",
         "category": "examples",
         "title": "🌸 Procedural Lily Flower",
         "path": os.path.join(ROOT_DIR, "examples", "05_procedural_flower.py"),
@@ -72,7 +81,7 @@ ITEMS = [
     },
     {
         "id": "eye",
-        "num": "5",
+        "num": "6",
         "category": "examples",
         "title": "👁️ CyberEye Matrix",
         "path": os.path.join(ROOT_DIR, "examples", "06_cyber_eye.py"),
@@ -81,7 +90,7 @@ ITEMS = [
     },
     {
         "id": "3d",
-        "num": "6",
+        "num": "7",
         "category": "examples",
         "title": "💠 3D Polyhedrons Demo",
         "path": os.path.join(ROOT_DIR, "examples", "02_3d_polyhedron.py"),
@@ -90,7 +99,7 @@ ITEMS = [
     },
     {
         "id": "dashboard",
-        "num": "7",
+        "num": "8",
         "category": "examples",
         "title": "📊 Universal Dashboard",
         "path": os.path.join(ROOT_DIR, "examples", "03_dashboard.py"),
@@ -167,7 +176,7 @@ def main():
                     run_target(ITEMS[selected_idx])
                     term.enter()
                     writer.invalidate()
-                elif k_low in "1234567":
+                elif k_low in "12345678":
                     idx = int(k_low) - 1
                     if 0 <= idx < len(ITEMS):
                         selected_idx = idx
@@ -228,7 +237,7 @@ def main():
                 ])
                 line.render(Rect(inner_menu.x, y, inner_menu.w, 1), buf)
                 y += 1
-                if i in (2,):  # Kategori ayraci
+                if i in (3,):  # Kategori ayraci
                     if y < inner_menu.y + inner_menu.h:
                         buf.put_str(inner_menu.x + 4, y, "─" * (inner_menu.w - 8), Style(fg=COLOR_BORDER, bg=COLOR_BG))
                         y += 1
@@ -281,7 +290,7 @@ def main():
             )
             help_block.render(rows[2], buf)
             inner_help = help_block.inner(rows[2])
-            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-7] Hizli Baslat   [Q/Esc] Cikis"
+            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-8] Hizli Baslat   [Q/Esc] Cikis"
             Paragraph(help_text, Style(fg=COLOR_TEXT, bg=COLOR_PANEL), align=CENTER).render(inner_help, buf)
 
             writer.flush(buf)
