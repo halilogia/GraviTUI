@@ -5,3 +5,5 @@ from .tree import Tree, TreeNode
 from .flower import ProceduralFlower
 from .flower_math import (FlowerPalette, FlowerPhase, FLOWER_PALETTES, lifecycle, petal_curve,
                           cubic_bezier, polar_point, ease_out_back, get_palette)
+from .eye import CyberEye
+from .eye_math import EyePalette, EYE_PALETTES, get_eye_palette

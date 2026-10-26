@@ -10,7 +10,8 @@ from .widgets import (Widget, Block, ALL, ROUNDED, DOUBLE, NONE, LEFT, CENTER, R
 from .extensions import (Canvas3D, Mesh3D, Face, Vector3, Matrix4, Quaternion, ParticleFX,
                          Particle, TileMap, Tile, Tree, TreeNode, ProceduralFlower, FlowerPalette,
                          FlowerPhase, FLOWER_PALETTES, lifecycle, petal_curve, cubic_bezier,
-                         polar_point, ease_out_back, get_palette)
+                         polar_point, ease_out_back, get_palette, CyberEye, EyePalette,
+                         EYE_PALETTES, get_eye_palette)
 from .app import App
 
 __version__ = "0.1.0"

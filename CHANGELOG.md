@@ -5,6 +5,11 @@
 ## [Unreleased]
 
 ### Eklendi
+- `extensions.eye`: `CyberEye` — karakter matrisinden prosedürel 3D siber göz: küre analitiği (`z=√(R²-x²-y²)`, eğrilik
+  gölgelemesi), parabolik göz kapakları, yumuşak göz kırpma, bakışa bağlı iris/lif/gözbebeği (dilation) ve parlama noktası,
+  saccade + mikro-titreme + nefes, "cyber" (harf/rakam/matematik sembolü) ve "density" glif stilleri, 4 TrueColor palet
+  (`Amber / Kehribar`, `Siber Yeşil / Matrix`, `Kanlı Ay / Kızıl`, `Sayborg Mavisi`). Matematik `eye_math.py` içinde.
+  Örnek 06 ve `tests/test_eye.py`.
 - `extensions.flower`: `ProceduralFlower` — Filiz → Sap/Yaprak → Tomurcuk → Açılış → Tam Zambak yaşam döngüsü (FSM),
   gerilimli (`ease_out_back`) taç yaprak açılışı, nefes animasyonu, polen parçacıkları, kutsal geometri
   yörünge çemberleri (braille), 4 TrueColor palet (`Zambak`, `Siber Lotus`, `Altın Orkide`, `Ruh Zambağı`).
