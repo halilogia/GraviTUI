@@ -183,8 +183,8 @@ def main():
 
             # 1. Baslik Alani
             header_block = Block(
+                borders=DOUBLE,
                 title="🪐 GraviTUI Uygulama ve Ekosistem Merkezi",
-                border_type=DOUBLE,
                 border_style=Style(fg=COLOR_GOLD, bg=COLOR_PANEL),
                 title_style=Style(fg=COLOR_GOLD, bg=COLOR_PANEL, bold=True)
             )
@@ -198,8 +198,8 @@ def main():
 
             # Sol Menu
             menu_block = Block(
+                borders=ROUNDED,
                 title="📋 Uygulama & Demo Listesi",
-                border_type=ROUNDED,
                 border_style=Style(fg=COLOR_BORDER, bg=COLOR_BG),
                 title_style=Style(fg=COLOR_CYAN, bold=True)
             )
@@ -236,8 +236,8 @@ def main():
             # Sag Bilgi & Detay Paneli
             sel_item = ITEMS[selected_idx]
             info_block = Block(
+                borders=ROUNDED,
                 title=f"🔍 Detay: {sel_item['title']}",
-                border_type=ROUNDED,
                 border_style=Style(fg=COLOR_BORDER_SEL, bg=COLOR_BG),
                 title_style=Style(fg=COLOR_GOLD, bold=True)
             )
@@ -276,7 +276,7 @@ def main():
 
             # 3. Alt Yardim Bar
             help_block = Block(
-                border_type=ROUNDED,
+                borders=ROUNDED,
                 border_style=Style(fg=COLOR_BORDER, bg=COLOR_PANEL)
             )
             help_block.render(rows[2], buf)

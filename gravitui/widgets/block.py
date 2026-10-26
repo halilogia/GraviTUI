@@ -25,8 +25,9 @@ _CHARS = {
 class Block(Widget):
     def __init__(self, borders: str = NONE, title: str = "", title_align: str = LEFT,
                  border_style: Style = DEFAULT_STYLE, title_style: Optional[Style] = None,
-                 style: Optional[Style] = None, padding=(0, 0, 0, 0)):
-        self.borders = borders
+                 style: Optional[Style] = None, padding=(0, 0, 0, 0),
+                 border_type: Optional[str] = None):
+        self.borders = border_type if border_type is not None else borders
         self.title = title
         self.title_align = title_align
         self.border_style = border_style

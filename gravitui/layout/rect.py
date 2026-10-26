@@ -17,6 +17,14 @@ class Rect:
         object.__setattr__(self, "height", max(0, self.height))
 
     @property
+    def w(self) -> int:
+        return self.width
+
+    @property
+    def h(self) -> int:
+        return self.height
+
+    @property
     def right(self) -> int:
         return self.x + self.width
 

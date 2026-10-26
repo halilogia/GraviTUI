@@ -37,6 +37,21 @@ class Line:
     def plain(self) -> str:
         return "".join(s.text for s in self.spans)
 
+    def render(self, area: Rect, buf: Buffer, clip: Optional[Rect] = None) -> None:
+        if area.is_empty():
+            return
+        clip_rect = clip or area
+        align = self.align or LEFT
+        w = self.width
+        if align == CENTER:
+            x = area.x + max(0, (area.width - w) // 2)
+        elif align == RIGHT:
+            x = area.x + max(0, area.width - w)
+        else:
+            x = area.x
+        for sp in self.spans:
+            x += buf.put_str(x, area.y, sp.text, sp.style, clip=clip_rect)
+
 
 def _chars(line: Line):
     return [(ch, s.style) for s in line.spans for ch in s.text]
