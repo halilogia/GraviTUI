@@ -6,7 +6,7 @@ Pure Python 3 TUI çerçevesi. Windows Terminal'de (VT100 + UTF-8) birinci sın�
 - **Diff tabanlı çizim:** `DiffWriter` yalnızca değişen hücreleri imleç atlamalarıyla yazar (flicker-free, 60 FPS hedefi).
 - **Ratatui tarzı layout:** `Layout.split(area, dir, [Percentage, Length, Ratio, Min, Max, Fill])`.
 - **Widget seti:** Block, Paragraph (Span/Line, word wrap), ListWidget, TableWidget, Gauge, Tabs, Popup.
-- **Süper güçler:** `Canvas3D` (yazılım rasterizer, z-buffer, flat shading), `ParticleFX` (parçacık, shake, glitch), `TileMap` (katmanlar + BFS), `Tree` (katlanabilir ağaç).
+- **Süper güçler:** `Canvas3D` (yazılım rasterizer, z-buffer, flat shading), `ParticleFX` (parçacık, shake, glitch), `TileMap` (katmanlar + BFS), `Tree` (katlanabilir ağaç), `ProceduralFlower` (prosedürel zambak: yaşam döngüsü, kutsal geometri, polen).
 
 ## Hızlı başlangıç
 
@@ -35,6 +35,7 @@ python -m unittest discover -s tests -t .
 | 2 | `examples/02_3d_polyhedron.py` | dönen d20 + küp (Canvas3D) |
 | 3 | `examples/03_dashboard.py` | canlı telemetri panosu |
 | 4 | `examples/04_office_mini.py` | karo haritası, BFS, parçacıklar |
+| 5 | `examples/05_procedural_flower.py` | prosedürel zambak, yarım blok + braille, 4 palet |
 
 ## Gereksinimler
 

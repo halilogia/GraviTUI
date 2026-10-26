@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### Eklendi
+- `extensions.flower`: `ProceduralFlower` — Filiz → Sap/Yaprak → Tomurcuk → Açılış → Tam Zambak yaşam döngüsü (FSM),
+  gerilimli (`ease_out_back`) taç yaprak açılışı, nefes animasyonu, polen parçacıkları, kutsal geometri
+  yörünge çemberleri (braille), 4 TrueColor palet (`Zambak`, `Siber Lotus`, `Altın Orkide`, `Ruh Zambağı`).
+  Matematik/tuval yardımcıları `flower_math.py` içinde. Örnek 05 ve `tests/test_flower.py`.
+
 ## [0.1.0] - 2026-10-25
 
 ### Eklendi

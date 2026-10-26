@@ -13,6 +13,6 @@
 - [x] widgets: base, block, paragraph, list_table, gauge, tabs, modal
 - [x] extensions: canvas3d, particles, tilemap, tree
 - [x] `__init__` public API, `App` döngüsü
-- [x] Örnekler 01-04
+- [x] Örnekler 01-05
 - [x] Testler: buffer, diff, layout, widgets, canvas3d, examples (69 test, OK)
 - [x] `run.bat` / `run.ps1` (boşluklu yol testli)
