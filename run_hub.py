@@ -230,7 +230,7 @@ def main():
                 y += 1
                 if i in (2,):  # Kategori ayraci
                     if y < inner_menu.y + inner_menu.h:
-                        buf.set_string(inner_menu.x + 4, y, "─" * (inner_menu.w - 8), Style(fg=COLOR_BORDER, bg=COLOR_BG))
+                        buf.put_str(inner_menu.x + 4, y, "─" * (inner_menu.w - 8), Style(fg=COLOR_BORDER, bg=COLOR_BG))
                         y += 1
 
             # Sag Bilgi & Detay Paneli
