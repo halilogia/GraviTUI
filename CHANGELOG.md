@@ -5,6 +5,12 @@
 ## [Unreleased]
 
 ### Eklendi
+- `apps/`: Üç ana bağımsız TUI projesinin GraviTUI monoreposuna entegrasyonu:
+  - `apps/rpg_dice`: 3D çokyüzlü RPG zarları, DC/Zorluk kontrolleri, kritik başarı parçacıkları.
+  - `apps/office_manager`: 24-bit ofis haritası, çalışan durum makineleri ve ekonomik simülasyon.
+  - `apps/monopoly`: 40 kare klasik tahta + 100.000 oyunluk Monte Carlo analitiği ve ısı haritası.
+- `run_hub.py`: Tüm uygulama ve demoları interaktif 24-bit TrueColor terminal menüsünden veya CLI argümanlarıyla başlatan evrensel launcher.
+- `tests/test_apps.py`: Monorepo uygulamalarının çekirdek motor ve model birim testleri (114/114 test).
 - `extensions.eye`: `CyberEye` — karakter matrisinden prosedürel 3D siber göz: küre analitiği (`z=√(R²-x²-y²)`, eğrilik
   gölgelemesi), parabolik göz kapakları, yumuşak göz kırpma, bakışa bağlı iris/lif/gözbebeği (dilation) ve parlama noktası,
   saccade + mikro-titreme + nefes, "cyber" (harf/rakam/matematik sembolü) ve "density" glif stilleri, 4 TrueColor palet

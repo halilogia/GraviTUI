@@ -65,5 +65,12 @@ alt-screen `\x1b[?1049h/l`, imleç `\x1b[?25l/h`, `msvcrt.kbhit/getwch` ile blok
 
 ## Testler
 
-`tests/` tamamen headless (gerçek terminal gerekmez). Örnekler de `tests/test_examples.py`
-ile üç boyutta (80x24, 120x40, 10x4) duman testine girer.
+`tests/` tamamen headless (gerçek terminal gerekmez). Örnekler ve monorepo uygulamaları (`test_apps.py`)
+stdlib `unittest` ile saniyeden kısa sürede otomatik test edilir.
+
+## Monorepo Uygulamaları (`apps/`) & Hub Mimarisi
+
+- `apps/rpg_dice`: 3D çokyüzlü RPG zar fiziği, Euler dönmesi, DC/kritik başarı motoru.
+- `apps/office_manager`: 24-bit ofis haritası, çalışan durum makineleri ve ekonomi.
+- `apps/monopoly`: 40 kare klasik tahta motoru + 100.000 oyunluk Monte Carlo analitiği.
+- `run_hub.py`: Tüm uygulama ve demoları tek bir interaktif 24-bit TrueColor arayüzden başlatan evrensel launcher.

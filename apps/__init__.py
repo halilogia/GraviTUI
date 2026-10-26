@@ -1,0 +1,1 @@
+"""GraviTUI official application suite."""
