@@ -8,6 +8,7 @@ Kullanim:
     python run_hub.py monopoly     -> Monopoly uygulamasini dogrudan baslatir
     python run_hub.py flower       -> Prosedurel Zambak gosterimini baslatir
     python run_hub.py eye          -> Siber Goz (CyberEye) gosterimini baslatir
+    python run_hub.py blackhole    -> Interstellar Gargantua karadelik gosterimini baslatir
     python run_hub.py --list       -> Uygulama ve ornek listesini yazdirir
 """
 import os
@@ -105,6 +106,15 @@ ITEMS = [
         "path": os.path.join(ROOT_DIR, "examples", "03_dashboard.py"),
         "cwd": ROOT_DIR,
         "desc": "Ratatui bilesenleri: flexbox layout, gauge gostergeleri, tablolar ve sistem durumu."
+    },
+    {
+        "id": "blackhole",
+        "num": "9",
+        "category": "examples",
+        "title": "🕳️ Interstellar Black Hole",
+        "path": os.path.join(ROOT_DIR, "examples", "07_interstellar_black_hole.py"),
+        "cwd": ROOT_DIR,
+        "desc": "Gargantua: yercekimsel merceklenme, Doppler isinimi, Kepler plazma diski ve Miller zaman genlesmesi telemetrisi."
     }
 ]
 
@@ -176,7 +186,7 @@ def main():
                     run_target(ITEMS[selected_idx])
                     term.enter()
                     writer.invalidate()
-                elif k_low in "12345678":
+                elif k_low in "123456789":
                     idx = int(k_low) - 1
                     if 0 <= idx < len(ITEMS):
                         selected_idx = idx
@@ -290,7 +300,7 @@ def main():
             )
             help_block.render(rows[2], buf)
             inner_help = help_block.inner(rows[2])
-            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-8] Hizli Baslat   [Q/Esc] Cikis"
+            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-9] Hizli Baslat   [Q/Esc] Cikis"
             Paragraph(help_text, Style(fg=COLOR_TEXT, bg=COLOR_PANEL), align=CENTER).render(inner_help, buf)
 
             writer.flush(buf)

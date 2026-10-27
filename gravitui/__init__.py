@@ -11,7 +11,9 @@ from .extensions import (Canvas3D, Mesh3D, Face, Vector3, Matrix4, Quaternion, P
                          Particle, TileMap, Tile, Tree, TreeNode, ProceduralFlower, FlowerPalette,
                          FlowerPhase, FLOWER_PALETTES, lifecycle, petal_curve, cubic_bezier,
                          polar_point, ease_out_back, get_palette, CyberEye, EyePalette,
-                         EYE_PALETTES, get_eye_palette)
+                         EYE_PALETTES, get_eye_palette, BlackHole, BlackHolePalette, BLACK_HOLE_PALETTES,
+                         get_black_hole_palette, schwarzschild_radius, photon_sphere_radius, shadow_radius,
+                         time_dilation, doppler_factor, lensed_radius, disk_crossings)
 from .app import App
 
 __version__ = "0.1.0"

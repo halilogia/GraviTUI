@@ -20,7 +20,7 @@ def load(name):
 class TestExamples(unittest.TestCase):
     def test_all_examples_draw(self):
         for name in ("01_hello_ratatui", "02_3d_polyhedron", "03_dashboard", "04_office_mini",
-                     "05_procedural_flower", "06_cyber_eye"):
+                     "05_procedural_flower", "06_cyber_eye", "07_interstellar_black_hole"):
             mod = load(name)
             for size in ((80, 24), (120, 40), (10, 4)):
                 buf = Buffer(*size)

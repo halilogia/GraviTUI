@@ -6,7 +6,7 @@ Pure Python 3 TUI çerçevesi. Windows Terminal'de (VT100 + UTF-8) birinci sın�
 - **Diff tabanlı çizim:** `DiffWriter` yalnızca değişen hücreleri imleç atlamalarıyla yazar (flicker-free, 60 FPS hedefi).
 - **Ratatui tarzı layout:** `Layout.split(area, dir, [Percentage, Length, Ratio, Min, Max, Fill])`.
 - **Widget seti:** Block, Paragraph (Span/Line, word wrap), ListWidget, TableWidget, Gauge, Tabs, Popup.
-- **Süper güçler:** `Canvas3D` (yazılım rasterizer, z-buffer, flat shading), `ParticleFX` (parçacık, shake, glitch), `TileMap` (katmanlar + BFS), `Tree` (katlanabilir ağaç), `ProceduralFlower` (prosedürel zambak), `CyberEye` (karakter matrisli siber göz).
+- **Süper güçler:** `Canvas3D` (yazılım rasterizer, z-buffer, flat shading), `ParticleFX` (parçacık, shake, glitch), `TileMap` (katmanlar + BFS), `Tree` (katlanabilir ağaç), `ProceduralFlower` (prosedürel zambak), `CyberEye` (karakter matrisli siber göz), `BlackHole` (Interstellar Gargantua: merceklenme + Doppler + Kepler diski).
 - **Entegre Uygulamalar (`apps/`):** RPG Dice Roller (3D zarlar), Office Manager Tycoon (ofis simülasyonu), Monopoly (40 kare + 100k simülasyon).
 
 ## 🚀 Hızlı Başlangıç & Merkezi Hub
@@ -18,6 +18,7 @@ python run_hub.py           # Etkileşimli TUI Launcher
 python run_hub.py monopoly  # Doğrudan Monopoly başlatır
 python run_hub.py dice      # Doğrudan RPG Dice başlatır
 python run_hub.py office    # Doğrudan Office Manager başlatır
+python run_hub.py blackhole # Interstellar Gargantua karadeliğini başlatır
 ```
 
 ## 📋 Temel Örnekler & Uygulamalar
@@ -31,6 +32,7 @@ python run_hub.py office    # Doğrudan Office Manager başlatır
 | 5 | `examples/06_cyber_eye.py` | ASCII kod matrisi tabanlı siber göz ve otonom bakış takibi |
 | 6 | `examples/02_3d_polyhedron.py` | Z-buffer yazılım rasterizer'ı ve 3D d20 dönme fiziği |
 | 7 | `examples/03_dashboard.py` | Canlı telemetri panosu ve flexbox layout |
+| 8 | `examples/07_interstellar_black_hole.py` | Gargantua karadeliği: yerçekimsel merceklenme, Doppler ışınımı, Miller zaman oranı |
 
 ## Gereksinimler
 

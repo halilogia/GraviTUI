@@ -5,6 +5,13 @@
 ## [Unreleased]
 
 ### Eklendi
+- `extensions.black_hole`: `BlackHole` — Interstellar Gargantua karadeliği. Schwarzschild olay ufku/foton küresi (1.5 Rs)/
+  gölge (3√3/2 Rs)/ISCO analitiği, önceden hesaplanmış geodezik süpürme tablosu ile yerçekimsel merceklenme (gölgenin üstünde
+  ve altında bükülen yaylar), Doppler ışınımı (`g = √(1-1.5Rs/r)/(1+Ωx sin i)`, sol taraf mavi/parlak, sağ kızıl/sönük),
+  Keplerian `Ω ~ r^-1.5` plazma türbülansı, orbital Lorentz faktörü ve Miller gezegeni zaman oranı (1 saat = 7 yıl).
+  Alt-piksel yarım blok (`▀`) ve ASCII yoğunluk modu, eğim/azimut/kütle/disk boyutu/dönüş hızı kontrolleri, 4 palet
+  (`Gargantua Gold`, `Hawking Blue`, `Crimson Singularity`, `Cyber Matrix`). Matematik `black_hole_math.py` içinde.
+  Örnek 07, `run_hub.py` madde 9 ve `tests/test_black_hole.py`.
 - `apps/`: Üç ana bağımsız TUI projesinin GraviTUI monoreposuna entegrasyonu:
   - `apps/rpg_dice`: 3D çokyüzlü RPG zarları, DC/Zorluk kontrolleri, kritik başarı parçacıkları.
   - `apps/office_manager`: 24-bit ofis haritası, çalışan durum makineleri ve ekonomik simülasyon.
