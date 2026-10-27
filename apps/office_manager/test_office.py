@@ -345,6 +345,10 @@ class TestRenderAndGame(unittest.TestCase):
         self.assertEqual(g.sim.total_time, paused_before)
         g.handle_key("ESC")
         self.assertFalse(g.handle_key("q"))
+        # ESC tuşu normal moddayken doğrudan çıkmalı
+        g_esc = Game(23)
+        self.assertFalse(g_esc.handle_key("ESC"))
+        self.assertFalse(g_esc.handle_key("esc"))
 
     def test_game_over_restart(self):
         g = Game(23)
@@ -354,6 +358,9 @@ class TestRenderAndGame(unittest.TestCase):
         Renderer().render(g.sim, g.ui, 0.03)
         self.assertTrue(g.handle_key("r"))
         self.assertFalse(g.sim.game_over)
+        # Game over ekranında ESC veya q ile çıkılabilmeli
+        g.sim.game_over = "İflas"
+        self.assertFalse(g.handle_key("ESC"))
 
 
 if __name__ == "__main__":

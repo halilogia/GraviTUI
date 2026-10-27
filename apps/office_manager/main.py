@@ -48,12 +48,12 @@ class Game:
         if sim.game_over:
             if key == "r":
                 self.__init__(self.seed)
-            return key != "q"
+            return key not in ("q", "ESC", "esc")
         if ui.mode != "normal":
             self._modal_key(key)
             return True
         n = len(sim.workers)
-        if key == "q":
+        if key in ("q", "ESC", "esc"):
             return False
         if key == "SPACE":
             ui.paused = not ui.paused

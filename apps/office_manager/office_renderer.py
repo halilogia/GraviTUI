@@ -494,7 +494,7 @@ class Renderer:
         keys = [("H", "İşe Al"), ("F", "Kov"), ("P", "Yeni Sprint"), ("B", "Prim Dağıt"),
                 ("C", "Kahve/Snack"), ("U", "Yükselt"),
                 ("M", "Toplantı"), ("K", "Crunch"), ("Spc", "Duraklat"), ("1-3", "Hız 1/2/4x"),
-                ("←→", "Seç"), ("Q", "Çıkış")]
+                ("←→", "Seç"), ("Esc/Q", "Çıkış")]
         for i, (k, d) in enumerate(keys):
             col, row = divmod(i, 6)
             x = PANEL_X + 2 + col * 16
@@ -556,7 +556,7 @@ class Renderer:
         b.box(30, 14, 60, 9, "OYUN BİTTİ", C.BAD, (30, 10, 14), C.BAD)
         b.text(34, 16, sim.game_over, C.WHITE, (30, 10, 14))
         b.text(34, 18, f"Hayatta kalınan gün: {sim.day}   Teslim edilen sprint: {sim.delivered}", C.TEXT, (30, 10, 14))
-        b.text(34, 20, "[R] Yeniden başla     [Q] Çıkış", C.GOLD, (30, 10, 14))
+        b.text(34, 20, "[R] Yeniden başla     [Esc/Q] Çıkış", C.GOLD, (30, 10, 14))
 
     # ------------------------------------------------------------ ana çizim
     def render(self, sim: Simulation, ui: UIState, dt: float) -> ScreenBuffer:
