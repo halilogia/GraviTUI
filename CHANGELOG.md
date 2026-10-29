@@ -5,6 +5,11 @@
 ## [Unreleased]
 
 ### Eklendi
+- `apps/stardew_valley`: Stardew Valley temalı çiftçilik RPG'si (24-bit TrueColor, 32x18 çiftlik). 8 ekinli `CROP_DATABASE`
+  (5 büyüme aşaması, yeniden hasat), 6 alet (çapa, sulama kabı 40 su, balta, kazma, tırpan, olta), 4 mevsim x 28 gün takvim
+  (06:00 başlangıç, 00:00 "Geç oldu!", 02:00 bayılma), 270 enerji / 500g / 12 slotluk çanta, sevkiyat kutusu ve gece özeti,
+  Pierre'in Mağazası (mevsimlik tohum al, ürün sat), balıkçılık mini oyunu. Motor (`game.py`) terminalden bağımsız ve headless
+  test edilir; `run_hub.py` madde 10 (`stardew`, hızlı tuş `0`), `apps/stardew_valley/test_stardew*.py` (47 test).
 - `extensions.black_hole`: `BlackHole` — Interstellar Gargantua karadeliği. Schwarzschild olay ufku/foton küresi (1.5 Rs)/
   gölge (3√3/2 Rs)/ISCO analitiği, önceden hesaplanmış geodezik süpürme tablosu ile yerçekimsel merceklenme (gölgenin üstünde
   ve altında bükülen yaylar), Doppler ışınımı (`g = √(1-1.5Rs/r)/(1+Ωx sin i)`, sol taraf mavi/parlak, sağ kızıl/sönük),

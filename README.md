@@ -19,6 +19,7 @@ python run_hub.py monopoly  # Doğrudan Monopoly başlatır
 python run_hub.py dice      # Doğrudan RPG Dice başlatır
 python run_hub.py office    # Doğrudan Office Manager başlatır
 python run_hub.py blackhole # Interstellar Gargantua karadeliğini başlatır
+python run_hub.py stardew   # Stardew Valley TUI çiftçilik oyununu başlatır
 ```
 
 ## 📋 Temel Örnekler & Uygulamalar
@@ -33,6 +34,7 @@ python run_hub.py blackhole # Interstellar Gargantua karadeliğini başlatır
 | 6 | `examples/02_3d_polyhedron.py` | Z-buffer yazılım rasterizer'ı ve 3D d20 dönme fiziği |
 | 7 | `examples/03_dashboard.py` | Canlı telemetri panosu ve flexbox layout |
 | 8 | `examples/07_interstellar_black_hole.py` | Gargantua karadeliği: yerçekimsel merceklenme, Doppler ışınımı, Miller zaman oranı |
+| 10 | `apps/stardew_valley/main.py` | Çiftçilik RPG'si: 4 mevsim, ekinler, enerji, aletler, sevkiyat kutusu, Pierre'in mağazası, balıkçılık |
 
 ## Gereksinimler
 

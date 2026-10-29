@@ -9,6 +9,7 @@ Kullanim:
     python run_hub.py flower       -> Prosedurel Zambak gosterimini baslatir
     python run_hub.py eye          -> Siber Goz (CyberEye) gosterimini baslatir
     python run_hub.py blackhole    -> Interstellar Gargantua karadelik gosterimini baslatir
+    python run_hub.py stardew      -> Stardew Valley TUI ciftcilik oyununu baslatir
     python run_hub.py --list       -> Uygulama ve ornek listesini yazdirir
 """
 import os
@@ -115,6 +116,15 @@ ITEMS = [
         "path": os.path.join(ROOT_DIR, "examples", "07_interstellar_black_hole.py"),
         "cwd": ROOT_DIR,
         "desc": "Gargantua: yercekimsel merceklenme, Doppler isinimi, Kepler plazma diski ve Miller zaman genlesmesi telemetrisi."
+    },
+    {
+        "id": "stardew",
+        "num": "10",
+        "category": "apps",
+        "title": "🌾 Stardew Valley TUI",
+        "path": os.path.join(ROOT_DIR, "apps", "stardew_valley", "main.py"),
+        "cwd": os.path.join(ROOT_DIR, "apps", "stardew_valley"),
+        "desc": "Ciftcilik RPG'si: 4 mevsim takvim, ekin yetistirme, enerji, aletler, sevkiyat kutusu, Pierre'in magazasi ve balikcilik."
     }
 ]
 
@@ -186,8 +196,8 @@ def main():
                     run_target(ITEMS[selected_idx])
                     term.enter()
                     writer.invalidate()
-                elif k_low in "123456789":
-                    idx = int(k_low) - 1
+                elif len(k_low) == 1 and k_low in "1234567890":
+                    idx = (int(k_low) - 1) % 10   # "0" tusu 10. maddeyi baslatir
                     if 0 <= idx < len(ITEMS):
                         selected_idx = idx
                         term.leave()
@@ -300,7 +310,7 @@ def main():
             )
             help_block.render(rows[2], buf)
             inner_help = help_block.inner(rows[2])
-            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-9] Hizli Baslat   [Q/Esc] Cikis"
+            help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-9/0] Hizli Baslat   [Q/Esc] Cikis"
             Paragraph(help_text, Style(fg=COLOR_TEXT, bg=COLOR_PANEL), align=CENTER).render(inner_help, buf)
 
             writer.flush(buf)
