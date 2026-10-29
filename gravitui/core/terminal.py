@@ -71,6 +71,14 @@ class Terminal:
     def size(self) -> Tuple[int, int]:
         return terminal_size()
 
+    @property
+    def width(self) -> int:
+        return terminal_size()[0]
+
+    @property
+    def height(self) -> int:
+        return terminal_size()[1]
+
     def write(self, data: str) -> None:
         self.out.write(data)
         self.out.flush()
@@ -107,17 +115,25 @@ class Terminal:
     def __exit__(self, *exc) -> None:
         self.leave()
 
-    def poll_key(self) -> Optional[str]:
-        """Bloklamadan tek tus okur; yoksa None."""
+    def poll_key(self, timeout_ms: int = 0) -> Optional[str]:
+        """Bloklamadan veya timeout_ms kadar bekleyerek tek tus okur; yoksa None."""
         if os.name == "nt":
             import msvcrt
-            if not msvcrt.kbhit():
+            import time
+            if timeout_ms > 0:
+                end = time.perf_counter() + (timeout_ms / 1000.0)
+                while not msvcrt.kbhit():
+                    if time.perf_counter() >= end:
+                        return None
+                    time.sleep(0.005)
+            elif not msvcrt.kbhit():
                 return None
             ch = msvcrt.getwch()
             if ch in ("\x00", "\xe0"):
                 return translate_key(ch, msvcrt.getwch())
             return translate_key(ch)
         import select
-        if not select.select([sys.stdin], [], [], 0)[0]:
+        timeout_sec = max(0.0, timeout_ms / 1000.0)
+        if not select.select([sys.stdin], [], [], timeout_sec)[0]:
             return None
         return translate_key(sys.stdin.read(1))

@@ -18,6 +18,7 @@ from apps.office_manager.simulation import Simulation, UPGRADES
 from apps.office_manager.worker import Worker, State, Role
 from apps.monopoly.board_data import TILES, Group, GROUP_RGB, Kind
 from apps.monopoly.monopoly_game import Game
+from run_hub import ITEMS
 
 
 class TestRpgDiceApp(unittest.TestCase):
@@ -68,6 +69,30 @@ class TestMonopolyApp(unittest.TestCase):
         self.assertEqual(game.current, 0)
         self.assertEqual(game.round_no, 1)
         self.assertFalse(game.over)
+
+
+class TestRunHub(unittest.TestCase):
+    def test_items_integrity(self):
+        self.assertGreaterEqual(len(ITEMS), 11)
+        ids = set()
+        nums = set()
+        for it in ITEMS:
+            self.assertIn(it["category"], ("apps", "examples"))
+            self.assertTrue(os.path.exists(it["path"]), f"Dosya bulunamadi: {it['path']}")
+            self.assertNotIn(it["id"], ids, f"Mukerrer ID: {it['id']}")
+            self.assertNotIn(it["num"], nums, f"Mukerrer num: {it['num']}")
+            ids.add(it["id"])
+            nums.add(it["num"])
+
+    def test_apps_precede_demos(self):
+        categories = [it["category"] for it in ITEMS]
+        first_demo = categories.index("examples")
+        # Ilk demodan once sadece apps olmali
+        for cat in categories[:first_demo]:
+            self.assertEqual(cat, "apps")
+        # Ilk demodan sonra sadece examples olmali
+        for cat in categories[first_demo:]:
+            self.assertEqual(cat, "examples")
 
 
 if __name__ == "__main__":
