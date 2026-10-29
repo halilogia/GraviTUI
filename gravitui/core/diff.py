@@ -1,6 +1,7 @@
 """DiffWriter: yalnizca degisen hucreleri tek parca halinde yazan motor."""
 from __future__ import annotations
 
+import sys
 from typing import Optional
 
 from .buffer import Buffer, Cell
@@ -8,7 +9,7 @@ from .buffer import Buffer, Cell
 
 class DiffWriter:
     def __init__(self, out=None):
-        self.out = out
+        self.out = sys.stdout if out is None else out
         self.prev: Optional[Buffer] = None
 
     def invalidate(self) -> None:

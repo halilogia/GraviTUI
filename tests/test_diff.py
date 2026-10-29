@@ -56,6 +56,11 @@ class TestDiff(unittest.TestCase):
         w.render(Buffer(3, 3))
         self.assertIn("\x1b[2J", w.render(Buffer(4, 3)))
 
+    def test_default_out_is_stdout(self):
+        import sys
+        w = DiffWriter()
+        self.assertIs(w.out, sys.stdout)
+
     def test_flush_writes_stream(self):
         s = io.StringIO()
         w = DiffWriter(s)

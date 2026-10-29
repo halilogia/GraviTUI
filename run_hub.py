@@ -1,47 +1,27 @@
-#!/usr/bin/env python3
-"""GraviTUI Evrensel Uygulama ve Demo Merkezi (Hub Launcher).
-
-Kullanim:
-    python run_hub.py              -> Etkilesimli TUI Hub Arayuzu
-    python run_hub.py dice         -> RPG Dice Roller uygulamasini dogrudan baslatir
-    python run_hub.py office       -> Office Manager Tycoon uygulamasini dogrudan baslatir
-    python run_hub.py monopoly     -> Monopoly uygulamasini dogrudan baslatir
-    python run_hub.py stardew      -> Stardew Valley TUI ciftcilik oyununu baslatir
-    python run_hub.py tree         -> Claude Agent Tree TUI uygulamasini baslatir
-    python run_hub.py pennywise    -> Pennywise ASCII karakter matrisi portresini baslatir
-    python run_hub.py blackhole    -> Interstellar Gargantua (Aurum) karadelik gosterimini baslatir
-    python run_hub.py flower       -> Prosedurel Zambak gosterimini baslatir
-    python run_hub.py eye          -> Siber Goz (CyberEye) gosterimini baslatir
-    python run_hub.py 3d           -> 3D Z-Buffer donen cokyuzluler gosterimini baslatir
-    python run_hub.py dashboard    -> Evrensel Sistem Telemetri Panosu gosterimini baslatir
-    python run_hub.py --list       -> Uygulama ve ornek listesini yazdirir
+"""GraviTUI Uygulama ve Ekosistem Hub'i (run_hub.py).
+Tek merkezden tum apps/ ve examples/ uygulamalarini 24-bit TrueColor arayuzle calistirir.
 """
+from __future__ import annotations
+
 import os
 import subprocess
 import sys
 import time
 
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
-# GraviTUI kok dizinini sys.path'e ekle
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
 from gravitui import (
-    Buffer, Color, Style, Rect, Layout, Length, Percentage, Fill, VERTICAL, HORIZONTAL,
-    Block, Paragraph, Line, Span, ROUNDED, DOUBLE, CENTER,
+    Buffer, Color, Style, Rect,
+    Layout, VERTICAL, HORIZONTAL, Length, Fill, Percentage,
+    Block, DOUBLE, ROUNDED,
+    Paragraph, Span, Line, CENTER,
     Terminal, DiffWriter
 )
 
-# Tum uygulamalar bir arada (1-5), tum demolar bir arada (6-11)
 ITEMS = [
-    # ── 🎮 UYGULAMALAR (APPS) ──────────────────────────────────────────────────
+    # --- 1..5: UYGULAMALAR (apps/) ---
     {
         "id": "dice",
         "num": "1",
@@ -58,7 +38,7 @@ ITEMS = [
         "title": "🏢 Office Manager Tycoon",
         "path": os.path.join(ROOT_DIR, "apps", "office_manager", "main.py"),
         "cwd": os.path.join(ROOT_DIR, "apps", "office_manager"),
-        "desc": "24-bit TrueColor ofis floor plani, calisan AI durum makineleri, krizler ve sirket ekonomisi."
+        "desc": "24-bit TrueColor ofis yonetim simulatöru: otonom calisanlar, kahve molalari, projeler ve yükseltmeler."
     },
     {
         "id": "monopoly",
@@ -67,7 +47,7 @@ ITEMS = [
         "title": "🎩 Monopoly & Monte Carlo",
         "path": os.path.join(ROOT_DIR, "apps", "monopoly", "main.py"),
         "cwd": os.path.join(ROOT_DIR, "apps", "monopoly"),
-        "desc": "Klasik 40 kare Monopoly TUI oyunu ve 100.000 oyunluk Monte Carlo inis/ROI isi haritasi."
+        "desc": "Klasik Monopoly tahtasi, cok oyunculu mod ve 100,000 zar simulasyonlu Monte Carlo olasilik analizi."
     },
     {
         "id": "stardew",
@@ -76,7 +56,7 @@ ITEMS = [
         "title": "🌾 Stardew Valley TUI",
         "path": os.path.join(ROOT_DIR, "apps", "stardew_valley", "main.py"),
         "cwd": os.path.join(ROOT_DIR, "apps", "stardew_valley"),
-        "desc": "Ciftcilik RPG'si: 4 mevsim takvim, ekin yetistirme, enerji, aletler, sevkiyat kutusu, Pierre'in magazasi ve balikcilik."
+        "desc": "Ciftlik simulasyonu: mevsimler, ekinler, Pelican Town, balikcilik mini oyunu ve JSON kayit sistemi."
     },
     {
         "id": "tree",
@@ -85,10 +65,10 @@ ITEMS = [
         "title": "🌲 Claude Agent Tree TUI",
         "path": os.path.join(ROOT_DIR, "apps", "claude_agent_tree", "main.py"),
         "cwd": os.path.join(ROOT_DIR, "apps", "claude_agent_tree"),
-        "desc": "Claude Code hiyerarsik coklu ajan agaci, Opus 5.5 oturumu, FABLE 5.1 advisor ve JEV metrikleri."
+        "desc": "Antigravity/Claude Code gorev agaci, subagent hiyerarsisi ve oturum telemetrisi izleme."
     },
 
-    # ── 🧪 DEMOLAR & GÖRSEL EFEKTLER (DEMOS) ──────────────────────────────────
+    # --- 6..11: DEMOLAR VE GORSEL EFEKTLER (examples/) ---
     {
         "id": "pennywise",
         "num": "6",
@@ -96,7 +76,7 @@ ITEMS = [
         "title": "🤡 Pennywise ASCII",
         "path": os.path.join(ROOT_DIR, "examples", "08_pennywise.py"),
         "cwd": ROOT_DIR,
-        "desc": "Karakter matrisinden beliren Pennywise: sari parlayan gozler, kizil makyaj, sac ve pileli yakalik."
+        "desc": "Codex tarafindan gelistirilen prosedurel karakter matrisi Pennywise palyanco portresi ve kirmizi balon."
     },
     {
         "id": "blackhole",
@@ -105,7 +85,7 @@ ITEMS = [
         "title": "🕳️ Interstellar Black Hole",
         "path": os.path.join(ROOT_DIR, "examples", "07_interstellar_black_hole.py"),
         "cwd": ROOT_DIR,
-        "desc": "Gargantua (Aurum Amber): merceklenme, ince foton halkasi, Doppler isinimi, akiskan Kepler plazmasi, 5 palet (C) ve Miller telemetrisi."
+        "desc": "Aerum/Aurum kalitesinde Schwarzschild genel gorelilik isin izleme, foton kuresi ve Doppler isimasli Gargantua."
     },
     {
         "id": "flower",
@@ -114,7 +94,7 @@ ITEMS = [
         "title": "🌸 Procedural Lily Flower",
         "path": os.path.join(ROOT_DIR, "examples", "05_procedural_flower.py"),
         "cwd": ROOT_DIR,
-        "desc": "24-bit TrueColor alt-piksel procedürel zambak buyume yasam dongusu ve kutsal geometri."
+        "desc": "Matematiksel kanvas uzerinde acan parametrik zambak cicegi: polar koordinatlar, yaprak evreleri ve polenler."
     },
     {
         "id": "eye",
@@ -211,7 +191,7 @@ def main():
 
     # Etkilesimli Hub Arayuzu
     term = Terminal()
-    writer = DiffWriter()
+    writer = DiffWriter(term.out or sys.stdout)
     buf = Buffer(term.width, term.height)
     term.enter()
 
@@ -219,48 +199,18 @@ def main():
 
     try:
         while True:
-            # Boyut degisimi kontrolu
+            # 1. Boyut degisimi kontrolu
             w, h = term.width, term.height
             if buf.width != w or buf.height != h:
                 buf = Buffer(w, h)
                 writer.invalidate()
 
-            # Klavye girisi dinleme (non-blocking)
-            key = term.poll_key(timeout_ms=50)
-            if key:
-                k_low = key.lower()
-                if k_low in ("q", "esc"):
-                    break
-                elif k_low in ("up", "w"):
-                    selected_idx = (selected_idx - 1) % len(ITEMS)
-                elif k_low in ("down", "s"):
-                    selected_idx = (selected_idx + 1) % len(ITEMS)
-                elif k_low in ("enter", "space"):
-                    term.leave()
-                    run_target(ITEMS[selected_idx])
-                    term.enter()
-                    writer.invalidate()
-                elif len(k_low) == 1 and k_low in "1234567890-":
-                    # Hizli tuslar: 1-9 -> 1-9. ogeler, 0 -> 10. oge, - -> 11. oge
-                    if k_low == "0":
-                        target_idx = 9
-                    elif k_low == "-":
-                        target_idx = 10
-                    else:
-                        target_idx = int(k_low) - 1
-                    if 0 <= target_idx < len(ITEMS):
-                        selected_idx = target_idx
-                        term.leave()
-                        run_target(ITEMS[selected_idx])
-                        term.enter()
-                        writer.invalidate()
-
             buf.clear()
 
-            # Ana yerlesim: Baslik, Govde (Liste + Detay), Alt Bilgi
+            # 2. Ana yerlesim: Baslik, Govde (Liste + Detay), Alt Bilgi
             rows = Layout.split(buf.area, VERTICAL, [Length(4), Fill(), Length(3)])
 
-            # 1. Baslik Alani
+            # Baslik Alani
             header_block = Block(
                 borders=DOUBLE,
                 title="🪐 GraviTUI Uygulama ve Ekosistem Merkezi",
@@ -272,7 +222,7 @@ def main():
             sub_title = "Evrensel 24-Bit TrueColor Python TUI Cercevesi — Birlesik Uygulama Monoreposu"
             Paragraph(sub_title, Style(fg=COLOR_CYAN, bg=COLOR_PANEL), align=CENTER).render(inner_h, buf)
 
-            # 2. Govde: Sol Menu (%58), Sag Bilgi Paneli (%42)
+            # Govde: Sol Menu (%58), Sag Bilgi Paneli (%42)
             cols = Layout.split(rows[1], HORIZONTAL, [Percentage(58), Fill()])
 
             # Sol Menu
@@ -374,7 +324,7 @@ def main():
                 if inner_info.y + row_idx < inner_info.y + inner_info.h:
                     il.render(Rect(inner_info.x, inner_info.y + row_idx, inner_info.w, 1), buf)
 
-            # 3. Alt Yardim Bar
+            # Alt Yardim Bar
             help_block = Block(
                 borders=ROUNDED,
                 border_style=Style(fg=COLOR_BORDER, bg=COLOR_PANEL)
@@ -384,8 +334,38 @@ def main():
             help_text = " [↑/↓/W/S] Menude Gezin   [ENTER/Bosluk] Calistir   [1-9/0/-] Hizli Baslat   [Q/Esc] Cikis"
             Paragraph(help_text, Style(fg=COLOR_TEXT, bg=COLOR_PANEL), align=CENTER).render(inner_help, buf)
 
+            # 3. Aninda Ekrana Bas (0ms gecikmeli cizim)
             writer.flush(buf)
-            time.sleep(0.03)
+
+            # 4. Klavye Dinleme (30ms timeout ile hem throttle hem duyarlilik)
+            key = term.poll_key(timeout_ms=30)
+            if key:
+                k_low = key.lower()
+                if k_low in ("q", "esc"):
+                    break
+                elif k_low in ("up", "w"):
+                    selected_idx = (selected_idx - 1) % len(ITEMS)
+                elif k_low in ("down", "s"):
+                    selected_idx = (selected_idx + 1) % len(ITEMS)
+                elif k_low in ("enter", "space"):
+                    term.leave()
+                    run_target(ITEMS[selected_idx])
+                    term.enter()
+                    writer.invalidate()
+                elif len(k_low) == 1 and k_low in "1234567890-":
+                    # Hizli tuslar: 1-9 -> 1-9. ogeler, 0 -> 10. oge, - -> 11. oge
+                    if k_low == "0":
+                        target_idx = 9
+                    elif k_low == "-":
+                        target_idx = 10
+                    else:
+                        target_idx = int(k_low) - 1
+                    if 0 <= target_idx < len(ITEMS):
+                        selected_idx = target_idx
+                        term.leave()
+                        run_target(ITEMS[selected_idx])
+                        term.enter()
+                        writer.invalidate()
 
     finally:
         term.leave()
