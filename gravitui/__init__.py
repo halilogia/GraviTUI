@@ -13,7 +13,9 @@ from .extensions import (Canvas3D, Mesh3D, Face, Vector3, Matrix4, Quaternion, P
                          polar_point, ease_out_back, get_palette, CyberEye, EyePalette,
                          EYE_PALETTES, get_eye_palette, BlackHole, BlackHolePalette, BLACK_HOLE_PALETTES,
                          get_black_hole_palette, schwarzschild_radius, photon_sphere_radius, shadow_radius,
-                         time_dilation, doppler_factor, lensed_radius, disk_crossings)
+                         time_dilation, doppler_factor, lensed_radius, disk_crossings,
+                         BLACK_HOLE_DEFAULT_PALETTE, AURUM_TONE, tone_map, deflection_angle, photon_ring_weight,
+                         plasma_flow)
 from .app import App
 
 __version__ = "0.1.0"

@@ -115,7 +115,7 @@ ITEMS = [
         "title": "🕳️ Interstellar Black Hole",
         "path": os.path.join(ROOT_DIR, "examples", "07_interstellar_black_hole.py"),
         "cwd": ROOT_DIR,
-        "desc": "Gargantua: yercekimsel merceklenme, Doppler isinimi, Kepler plazma diski ve Miller zaman genlesmesi telemetrisi."
+        "desc": "Gargantua (Aurum Amber): merceklenme, ince foton halkasi, Doppler isinimi, akiskan Kepler plazmasi, 5 palet (C) ve Miller telemetrisi."
     },
     {
         "id": "stardew",

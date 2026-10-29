@@ -17,6 +17,17 @@
   Alt-piksel yarım blok (`▀`) ve ASCII yoğunluk modu, eğim/azimut/kütle/disk boyutu/dönüş hızı kontrolleri, 4 palet
   (`Gargantua Gold`, `Hawking Blue`, `Crimson Singularity`, `Cyber Matrix`). Matematik `black_hole_math.py` içinde.
   Örnek 07, `run_hub.py` madde 9 ve `tests/test_black_hole.py`.
+- `extensions.black_hole` Aurum kalitesi (TwoHorizonsWallpaper `aurum.js`/`shaders.js` uyumu): varsayılan palet **`Aurum Amber`**
+  (takma adlar `aurum`, `aerum`, `amber`): `uCool/uMid/uHot` = (0.52,0.14,0.03)/(1.00,0.48,0.12)/(1.00,0.85,0.52), gain 1.1,
+  Doppler 1.05, rIn=3 (ISCO), rOut=8.4, eğim 0.10 rad ufuk üstü (kutuptan ~84.3°). Disk `diskSample` formülüyle boyanır
+  (`T^2.2 · turb · g^3.2`, sıcaklık-ton karışımı, ön-arka alfa birleşimi) ve ACES filmik tonlama + sRGB gama ile 24-bit
+  TrueColor'a çevrilir; birincil + ikincil (merceklenmiş) disk görüntüsü birlikte çizilir (`rings=2`).
+  Yeni yapı taşları: `black_hole_palette.py` (`tone` paletleri, `tone_hue`, `tone_map`), `black_hole_plasma.py` (azimutta
+  periyodik fbm dokusu + akış-haritası karışımlı Keplerian diferansiyel dönüş, kayma sarılıp titremez), `black_hole_math.py`
+  (`deflection_angle` Bozza/tablo/zayıf alan, `sky_angle` gerçek Einstein görüntülü gökyüzü merceklenmesi,
+  `photon_ring_weight` çözünürlükten bağımsız ~1 piksel ince foton halkası, `aurum_temperature/aurum_edge`,
+  `doppler_factor(strength=)`). `BlackHole.apply_preset()` palet geometrisini geri yükler; örnek 07'de `C` palet geçişi
+  (5 palet), `P` önayara dönüş. `tests/test_black_hole_aurum.py` (16 test, toplam 204).
 - `apps/`: Üç ana bağımsız TUI projesinin GraviTUI monoreposuna entegrasyonu:
   - `apps/rpg_dice`: 3D çokyüzlü RPG zarları, DC/Zorluk kontrolleri, kritik başarı parçacıkları.
   - `apps/office_manager`: 24-bit ofis haritası, çalışan durum makineleri ve ekonomik simülasyon.

@@ -1,8 +1,8 @@
-"""Interstellar Gargantua: Ok/WASD kamera, +/- veya E/Z kutle, [ ] disk, R Doppler, C palet, M mod, Space duraklat, Q/Esc cikis"""
+"""Interstellar Gargantua: Ok/WASD kamera, +/- veya E/Z kutle, [ ] disk, R Doppler, C palet (Aurum Amber ilk), P palet onayarina don, M mod, Space duraklat, Q/Esc cikis"""
 from _path import ROOT  # noqa: F401  (sys.path ayari)
 from gravitui import (App, BlackHole, Layout, Length, Paragraph, Percentage, Style, VERTICAL, GRAY)
 
-bh = BlackHole(inclination=82.0)
+bh = BlackHole()   # varsayilan: Aurum Amber (egim ~84.3 derece, rOut=8.4, Doppler 1.05, gain 1.1)
 TILT, TURN = 2.0, 6.0
 
 
@@ -46,6 +46,8 @@ def on_key(k):
         bh.toggle_doppler()
     elif k == "c":
         bh.next_palette()
+    elif k == "p":
+        bh.apply_preset()
     elif k == "m":
         bh.next_mode()
     elif k == "space":

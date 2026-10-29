@@ -6,6 +6,8 @@ import math
 from bisect import bisect_right
 from typing import List, Optional, Tuple
 
+from .black_hole_plasma import plasma_turbulence  # noqa: F401  (geri uyumluluk: eskiden burada tanimliydi)
+
 CRIT_B = 1.5 * math.sqrt(3.0)          # golge (kritik carpma parametresi) yaricapi / Rs = 3*sqrt(3)/2
 HOURS_PER_YEAR = 8766.0
 SOLAR_RS_KM = 2.9532                   # 1 gunes kutlesinin Schwarzschild yaricapi (km)
@@ -95,10 +97,11 @@ def disk_omega(r: float, r_in: float, speed: float = 1.0) -> float:
     return speed * (r_in / r) ** 1.5
 
 
-def doppler_factor(r: float, x: float, sin_i: float, rs: float = 1.0) -> float:
-    """g = nu_gozlenen / nu_yayilan = sqrt(1 - 1.5Rs/r) / (1 + Omega * x * sin i).
-    x < 0 (sol, gozlemciye yaklasan taraf) icin g > 1 (maviye kayma), x > 0 icin g < 1 (kizila kayma)."""
-    den = max(1.0 + keplerian_omega(r, rs) * x * sin_i, 0.05)
+def doppler_factor(r: float, x: float, sin_i: float, rs: float = 1.0, strength: float = 1.0) -> float:
+    """g = nu_gozlenen / nu_yayilan = sqrt(1 - 1.5Rs/r) / (1 + strength * Omega * x * sin i).
+    x < 0 (sol, gozlemciye yaklasan taraf) icin g > 1 (maviye kayma), x > 0 icin g < 1 (kizila kayma).
+    strength: Doppler asimetrisi carpani (Aurum: 1.05)."""
+    den = max(1.0 + strength * keplerian_omega(r, rs) * x * sin_i, 0.05)
     return orbital_time_dilation(r, rs) / den
 
 
@@ -129,11 +132,14 @@ def disk_temperature(r: float, r_in: float) -> float:
     return _t_raw(max(r / r_in, 1.0)) / _T_PEAK
 
 
-def plasma_turbulence(rn: float, phi: float) -> float:
-    """Plazma turbulansi 0..1; rn = r / r_in, phi = dokuyla birlikte donen azimut."""
-    n = 0.55 + 0.22 * math.sin(9.0 * rn + 3.0 * phi) + 0.18 * math.sin(23.0 * rn - 5.0 * phi + 1.7) \
-        + 0.10 * math.sin(7.0 * phi + 41.0 * rn)
-    return 0.0 if n < 0 else 1.0 if n > 1 else n
+def aurum_temperature(r: float, r_in: float) -> float:
+    """Aurum sahnesinin disk sicakligi: T = 1.3 (r_in / r)^0.75 (ISCO'da 1.3, tepe sinirsiz degil)."""
+    return 1.3 * min(max(r_in / r, 0.01), 8.0) ** 0.75
+
+
+def aurum_edge(r: float, r_in: float, r_out: float) -> float:
+    """Disk kenar solmasi: ic kenarda r_in..r_in+0.6, dis kenarda r_out/2..r_out yumusak adim (Aurum `edge`)."""
+    return smoothstep(r_in, r_in + 0.6, r) * (1.0 - smoothstep(0.5 * r_out, r_out, r))
 
 
 # --- Geodezik supurme tablosu (merceklenme) --------------------------------------------------------
@@ -180,6 +186,7 @@ SWEEP_MAX = 3.2 * math.pi
 _D_SWEEP = SWEEP_MAX / (NS - 1)
 _B_LIST: List[float] = []
 _U_TABLE: List[List[float]] = []
+_PHP: List[Tuple[float, float]] = []      # (ln(b/CRIT_B - 1), periapsis supurmesi) yalniz b > CRIT_B
 
 
 def _u_at(us: List[float], psi: List[float], target: float) -> float:
@@ -207,6 +214,8 @@ def _build_table() -> None:
     bs = [CRIT_B * (1 - g) for g in reversed(gs)] + [CRIT_B * (1 + g) for g in outer]
     for b in bs:
         us, psi, php, peri = _row(b)
+        if peri:
+            _PHP.append((math.log(b / CRIT_B - 1.0), php))
         row = []
         for k in range(NS):
             sw = k * _D_SWEEP
@@ -244,6 +253,60 @@ def lensed_radius(b: float, sweep: float, rs: float = 1.0) -> Optional[float]:
     else:
         u = (c[0] * (1 - fx) + c[1] * fx) * (1 - t) + (c[2] * (1 - fx) + c[3] * fx) * t
     return rs / u if u > 1e-6 else None
+
+
+_BOZZA_C = math.log(216.0 * (7.0 - 4.0 * math.sqrt(3.0))) - math.pi
+_PHP_KEYS: List[float] = []
+
+
+def _php_index(ln: float) -> int:
+    if not _PHP_KEYS:
+        _PHP_KEYS.extend(p[0] for p in _PHP)
+    return bisect_right(_PHP_KEYS, ln)
+
+
+def deflection_angle(b: float, rs: float = 1.0) -> float:
+    """Uzak gozlemciden gelen, carpma parametresi b olan isigin toplam sapma acisi (rad); b <= kritik icin sonsuz.
+    Kritik yakininda Bozza yaklasimi -ln(b/b_c - 1) + ln(216 (7 - 4 sqrt3)) - pi, ortada geodezik tablo,
+    zayif alanda 2 Rs/b + 15 pi Rs^2 / (16 b^2)."""
+    b /= rs
+    if b <= CRIT_B:
+        return math.inf
+    if b >= TABLE_B_MAX:
+        return 2.0 / b + 15.0 * math.pi / (16.0 * b * b)
+    if not _B_LIST:
+        _build_table()
+    ln = math.log(b / CRIT_B - 1.0)
+    if ln <= _PHP[0][0]:
+        return -ln + _BOZZA_C
+    k = _php_index(ln)
+    if k >= len(_PHP):
+        return 2.0 / b + 15.0 * math.pi / (16.0 * b * b)
+    (l0, p0), (l1, p1) = _PHP[k - 1], _PHP[k]
+    return 2.0 * (p0 + (p1 - p0) * (ln - l0) / (l1 - l0)) - math.pi
+
+
+def sky_angle(b: float, apparent: float, rs: float = 1.0) -> float:
+    """Gokyuzundeki gercek kaynak yonunun gozlem eksenine (karadelik arkasi = 0) gore isaretli acisi:
+    apparent - sapma. Negatif -> karsi azimut; |aci| > pi sarilir (cok sayida Einstein gorUntusu)."""
+    d = deflection_angle(b, rs)
+    if math.isinf(d):
+        return math.inf
+    a = (apparent - d + math.pi) % (2.0 * math.pi) - math.pi
+    return a
+
+
+def photon_ring_weight(b: float, px_rs: float) -> float:
+    """Foton halkasi (b ~ CRIT_B, n-inci alt halka b_n = CRIT_B (1 + exp(-pi n - 0.4)) Lyapunov ile ustel inceler)
+    icin 0..1 agirlik. Halka cozunurlukten bagimsiz ~1 piksel inceliginde ve keskin kalir: px_rs = bir pikselin Rs
+    cinsinden boyu. Golge kenarindaki yarim piksel icine tasarak kenar yumusatma saglar."""
+    e = b - CRIT_B
+    if e < -0.5 * px_rs:
+        return 0.0
+    w = max(0.9 * px_rs, 0.05)
+    if e < 0.0:
+        return smoothstep(-0.5 * px_rs, 0.0, e)
+    return math.exp(-e / w)
 
 
 def disk_crossings(sx: float, sy: float, inclination_deg: float, crossings: int = 3,

@@ -105,10 +105,10 @@ class TestLensing(unittest.TestCase):
 
 
 class TestPalettes(unittest.TestCase):
-    def test_four_named_palettes(self):
+    def test_five_named_palettes(self):
         names = [p.name for p in BLACK_HOLE_PALETTES]
-        self.assertGreaterEqual(len(names), 4)
-        for n in ("Gargantua Gold", "Hawking Blue", "Crimson Singularity", "Cyber Matrix"):
+        self.assertGreaterEqual(len(names), 5)
+        for n in ("Aurum Amber", "Gargantua Gold", "Hawking Blue", "Crimson Singularity", "Cyber Matrix"):
             self.assertIn(n, names)
             self.assertIsInstance(get_black_hole_palette(n.split()[0]), BlackHolePalette)
 
