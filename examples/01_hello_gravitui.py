@@ -20,7 +20,7 @@ def draw(buf, dt):
         Line([Span("Merhaba ", Style(fg=YELLOW, bold=True)),
               Span("GraviTUI!", Style(fg=GREEN, italic=True))]),
         Line.of(""),
-        Line.of("Ratatui'den esinlenen, sifir bagimlilikli Pure Python TUI cercevesi. "
+        Line.of("Sifir bagimlilikli, 24-bit TrueColor destekli Pure Python TUI cercevesi. "
                 "Word wrap, 24-bit renk ve diff tabanli flicker-free cizim."),
     ], block=Block(DOUBLE, "Paragraf", border_style=Style(fg=ORANGE), padding=(1, 0, 1, 0))
     ).render(cols[0], buf)

@@ -1,10 +1,10 @@
 # GraviTUI
 
-Ratatui'den esinlenen, **sıfır pip bağımlılıklı**, 24-bit TrueColor destekli evrensel
+**sıfır pip bağımlılıklı**, 24-bit TrueColor destekli evrensel
 Pure Python 3 TUI çerçevesi. Windows Terminal'de (VT100 + UTF-8) birinci sınıf çalışır.
 
 - **Diff tabanlı çizim:** `DiffWriter` yalnızca değişen hücreleri imleç atlamalarıyla yazar (flicker-free, 60 FPS hedefi).
-- **Ratatui tarzı layout:** `Layout.split(area, dir, [Percentage, Length, Ratio, Min, Max, Fill])`.
+- **Flexbox tarzı güçlü layout:** `Layout.split(area, dir, [Percentage, Length, Ratio, Min, Max, Fill])`.
 - **Widget seti:** Block, Paragraph (Span/Line, word wrap), ListWidget, TableWidget, Gauge, Tabs, Popup.
 - **Süper güçler:** `Canvas3D` (yazılım rasterizer, z-buffer, flat shading), `ParticleFX` (parçacık, shake, glitch), `TileMap` (katmanlar + BFS), `Tree` (katlanabilir ağaç), `ProceduralFlower` (prosedürel zambak), `CyberEye` (karakter matrisli siber göz), `BlackHole` (Interstellar Gargantua: Aurum paleti, merceklenme + foton halkası + Doppler + Kepler diski).
 - **Entegre Uygulamalar (`apps/`):** RPG Dice Roller (3D zarlar), Office Manager Tycoon (ofis simülasyonu), Monopoly (40 kare + 100k simülasyon).

@@ -1,4 +1,4 @@
-"""Ratatui tarzi flex layout hesaplayici."""
+"""Flexbox tarzi guclu layout hesaplayici."""
 from __future__ import annotations
 
 from typing import List, Sequence

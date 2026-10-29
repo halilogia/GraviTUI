@@ -24,5 +24,5 @@
 - [ ] Performans: yalnızca kirli satır takibi, ağır döngülerde `array`/bytearray tamponları
 
 ## Fikirler (kapsam dışı değil)
-- Widget'lar için `StatefulWidget` ayrımı (Ratatui paritesi)
+- Widget'lar için `StatefulWidget` ayrımı (StatefulWidget mimarisi)
 - Kaydet/oynat: karelerin `.ansi` dosyasına kaydı (devlog klipleri için)

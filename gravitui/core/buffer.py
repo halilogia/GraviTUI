@@ -62,7 +62,7 @@ class Buffer:
 
     def set_string(self, x: int, y: int, text: str, style: Style = DEFAULT_STYLE,
                    clip: Optional[Rect] = None) -> int:
-        """set_string alias (Ratatui uyumlulugu icin)."""
+        """set_string alias (put_str uyumlulugu)."""
         return self.put_str(x, y, text, style, clip)
 
     def set_style(self, area: Rect, style: Style) -> None:

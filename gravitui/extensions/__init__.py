@@ -7,9 +7,8 @@ from .flower_math import (FlowerPalette, FlowerPhase, FLOWER_PALETTES, lifecycle
                           cubic_bezier, polar_point, ease_out_back, get_palette)
 from .eye import CyberEye
 from .eye_math import EyePalette, EYE_PALETTES, get_eye_palette
+from .pennywise import Pennywise
 from .black_hole import BlackHole, BlackHolePalette, BLACK_HOLE_PALETTES, get_black_hole_palette
-from .black_hole_palette import DEFAULT_PALETTE as BLACK_HOLE_DEFAULT_PALETTE, AURUM_TONE, tone_map
-from .black_hole_plasma import sample_plasma, plasma_flow
 from .black_hole_palette import DEFAULT_PALETTE as BLACK_HOLE_DEFAULT_PALETTE, AURUM_TONE, tone_map
 from .black_hole_plasma import sample_plasma, plasma_flow
 from .black_hole_math import (schwarzschild_radius, schwarzschild_radius_km, photon_sphere_radius, isco_radius,

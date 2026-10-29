@@ -1,4 +1,4 @@
-"""GraviTUI: Ratatui'den esinlenen, sifir bagimlilikli Pure Python TrueColor TUI cercevesi."""
+"""GraviTUI: Sifir bagimlilikli, 24-bit TrueColor destekli Pure Python TUI cercevesi."""
 from .core import (Color, Style, gradient, gradient_at, Cell, Buffer, DiffWriter, Terminal,
                    enable_windows_vt, terminal_size, translate_key, DEFAULT_STYLE,
                    WHITE, BLACK, GRAY, RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA, ORANGE)
@@ -10,7 +10,7 @@ from .widgets import (Widget, Block, ALL, ROUNDED, DOUBLE, NONE, LEFT, CENTER, R
 from .extensions import (Canvas3D, Mesh3D, Face, Vector3, Matrix4, Quaternion, ParticleFX,
                          Particle, TileMap, Tile, Tree, TreeNode, ProceduralFlower, FlowerPalette,
                          FlowerPhase, FLOWER_PALETTES, lifecycle, petal_curve, cubic_bezier,
-                         polar_point, ease_out_back, get_palette, CyberEye, EyePalette,
+                         polar_point, ease_out_back, get_palette, CyberEye, EyePalette, Pennywise,
                          EYE_PALETTES, get_eye_palette, BlackHole, BlackHolePalette, BLACK_HOLE_PALETTES,
                          get_black_hole_palette, schwarzschild_radius, photon_sphere_radius, shadow_radius,
                          time_dilation, doppler_factor, lensed_radius, disk_crossings,

@@ -203,7 +203,8 @@ class TestRender(unittest.TestCase):
         import importlib
         hub = importlib.import_module("run_hub")
         item = next(i for i in hub.ITEMS if i["id"] == "stardew")
-        self.assertEqual(item["num"], "10")
+        self.assertEqual(item["num"], "4")
+        self.assertEqual(item["category"], "apps")
         self.assertTrue(os.path.isfile(item["path"]))
 
 

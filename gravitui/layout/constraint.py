@@ -1,4 +1,4 @@
-"""Layout kisitlari (Ratatui Constraint benzeri)."""
+"""Layout kisit siniflari (Percentage, Length, Ratio, Min, Max, Fill)."""
 from __future__ import annotations
 
 from dataclasses import dataclass
